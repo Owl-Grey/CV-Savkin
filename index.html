@@ -1,234 +1,484 @@
-<!doctype html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Савкин Сергей Петрович — Системный аналитик</title>
-  <meta name="description" content="Резюме системного аналитика: проектирование требований, UML/BPMN, REST/gRPC интеграции, документация, сопровождение тестирования и разработки." />
-  <meta property="og:title" content="Савкин Сергей Петрович — Системный аналитик" />
-  <meta property="og:description" content="Опыт: МЕДСИ (тимлид/техлид), интеграции REST↔gRPC, UML/BPMN, SQL. Самара | Удалёнка." />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="ru_RU" />
-  <meta name="color-scheme" content="light dark" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sergey Savkin — System Analyst CV</title>
   <style>
-    :root{
-      --bg: #0b0c0f; --fg: #e8e8ea; --muted:#a9acb3; --card:#121318; --accent:#7aa2ff; --line:#22242c;
-      --bg-light:#ffffff; --fg-light:#0d0f14; --muted-light:#5b6070; --card-light:#f7f8fb; --line-light:#e8eaf1; --accent-light:#2157ff;
-      --radius:16px; --shadow:0 6px 24px rgba(0,0,0,.18);
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121933;
+      --card: rgba(18, 25, 51, 0.82);
+      --line: rgba(255,255,255,0.08);
+      --text: #edf2ff;
+      --muted: #b4bfdc;
+      --accent: #7c9cff;
+      --accent-2: #6ee7c8;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
     }
-    @media (prefers-color-scheme: light){
-      body{background:var(--bg-light); color:var(--fg-light)}
-      .card{background:var(--card-light); box-shadow: var(--shadow); border:1px solid var(--line-light)}
-      a{color:var(--accent-light)}
-      .muted{color:var(--muted-light)}
-      .tag{background:#eef2ff; color:#1438aa; border:1px solid #dbe4ff}
-      hr{border-color:var(--line-light)}
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124,156,255,0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(110,231,200,0.14), transparent 28%),
+        linear-gradient(180deg, #09101f 0%, #0b1020 100%);
+      color: var(--text);
+      line-height: 1.55;
+      padding: 48px 20px;
     }
-    @media (prefers-color-scheme: dark){
-      body{background:var(--bg); color:var(--fg)}
-      .card{background:var(--card); box-shadow: var(--shadow); border:1px solid var(--line)}
-      a{color:var(--accent)}
-      .muted{color:var(--muted)}
-      .tag{background:#171b28; color:#bcd0ff; border:1px solid #243156}
-      hr{border-color:var(--line)}
+
+    .page {
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 24px;
     }
-    *{box-sizing:border-box}
-    body{margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji"}
-    .wrap{max-width:980px; margin:0 auto; padding:28px 20px 80px}
-    header{display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center}
-    h1{font-size:28px; line-height:1.2; margin:0}
-    .subtitle{margin-top:6px}
-    .actions{display:flex; gap:10px; flex-wrap:wrap}
-    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid currentColor; text-decoration:none; font-weight:600}
-    .btn.secondary{opacity:.85}
-    nav{margin-top:18px; display:flex; gap:14px; flex-wrap:wrap}
-    nav a{opacity:.9; text-decoration:none}
-    main{margin-top:28px; display:grid; gap:24px}
-    section.card{padding:18px 20px; border-radius:var(--radius)}
-    h2{margin:0 0 10px; font-size:20px}
-    h3{margin:14px 0 6px; font-size:16px}
-    ul{margin:8px 0 0 20px}
-    .grid{display:grid; gap:14px}
-    .two{grid-template-columns:1fr 1fr}
-    .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
-    .tag{padding:6px 10px; border-radius:999px; font-size:13px}
-    .row{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap}
-    .muted{font-size:14px}
-    hr{border:none; border-top:1px solid; margin:14px 0}
-    footer{margin-top:28px; font-size:14px}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
-    @media (max-width:760px){
-      .two{grid-template-columns:1fr}
+
+    .sidebar, .main {
+      background: var(--card);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
     }
-    /* Печать */
-    @media print{
-      .btn, nav, footer{display:none}
-      body{background:#fff; color:#000}
-      .card{border:1px solid #ddd; box-shadow:none}
-      a{color:#000}
+
+    .sidebar {
+      padding: 28px;
+      position: sticky;
+      top: 24px;
+      align-self: start;
+    }
+
+    .main {
+      padding: 34px;
+    }
+
+    .name {
+      font-size: 2rem;
+      line-height: 1.05;
+      margin: 0 0 8px;
+      letter-spacing: -0.03em;
+    }
+
+    .role {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--accent-2);
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin: 0 0 24px;
+    }
+
+    .contact, .skills-list, .tools-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .contact li, .skills-list li, .tools-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .contact li:last-child, .skills-list li:last-child, .tools-list li:last-child {
+      border-bottom: none;
+    }
+
+    .side-section + .side-section {
+      margin-top: 28px;
+    }
+
+    .side-title, .section-title {
+      margin: 0 0 14px;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 2.7rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 640px;
+      font-size: 1.04rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(124,156,255,0.24);
+      background: rgba(124,156,255,0.08);
+      color: #dbe5ff;
+      font-size: 0.92rem;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .summary {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .achievement {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .achievement strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .achievement span {
+      color: var(--muted);
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .exp-item {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+      background: rgba(255,255,255,0.025);
+    }
+
+    .exp-item + .exp-item {
+      margin-top: 16px;
+    }
+
+    .exp-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .exp-head h3 {
+      margin: 0;
+      font-size: 1.12rem;
+    }
+
+    .company {
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+
+    .date {
+      color: var(--muted);
+      font-size: 0.94rem;
+      white-space: nowrap;
+    }
+
+    .exp-intro {
+      color: var(--muted);
+      margin: 0 0 12px;
+    }
+
+    ul.bullets {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    ul.bullets li + li {
+      margin-top: 8px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(255,255,255,0.025);
+    }
+
+    .mini-card h4 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .footer-note {
+      color: #93a2c9;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        position: static;
+      }
+      .achievement-grid, .two-col {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        color: #111;
+        padding: 0;
+      }
+      .page {
+        max-width: none;
+        grid-template-columns: 280px 1fr;
+        gap: 16px;
+      }
+      .sidebar, .main, .achievement, .exp-item, .mini-card {
+        box-shadow: none;
+        background: #fff;
+        color: #111;
+        border-color: #ddd;
+      }
+      .side-title, .section-title, .role, .company { color: #2047c7; }
+      .lead, .contact li, .skills-list li, .tools-list li, .summary, .exp-intro, ul.bullets li, .achievement span, .date, .footer-note, .hero p { color: #444; }
+      .pill { border-color: #cfd7f0; background: #f5f7ff; color: #2047c7; }
     }
   </style>
-  <script>
-    // лёгкая защита от спам-ботов для e-mail
-    function revealEmail(){
-      const node = document.getElementById('email');
-      node.textContent = 'bruss.games' + '@' + 'gmail.com';
-      node.href = 'mailto:' + node.textContent;
-    }
-    document.addEventListener('DOMContentLoaded', revealEmail);
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Person",
-    "name":"Савкин Сергей Петрович",
-    "jobTitle":"Системный аналитик",
-    "address":{"@type":"PostalAddress","addressLocality":"Самара","addressCountry":"RU"},
-    "email":"mailto:bruss.games@gmail.com",
-    "telephone":"+7-903-366-30-05",
-    "url":"https://your-github-username.github.io/savkin-resume/",
-    "sameAs":["https://t.me/Owl_Grey"]
-  }
-  </script>
 </head>
 <body>
-  <div class="wrap" itemscope itemtype="https://schema.org/Person">
-    <header>
-      <div>
-        <h1 itemprop="name">Савкин Сергей Петрович</h1>
-        <div class="subtitle" itemprop="jobTitle">Системный аналитик</div>
-        <div class="muted">Самара • Готов к удалённой работе</div>
+  <div class="page">
+    <aside class="sidebar">
+      <h2 class="name">Sergey<br>Savkin</h2>
+      <div class="role">System Analyst</div>
+      <p class="lead">Strong middle analyst with a developer background, focused on API design, integrations, and system architecture.</p>
+
+      <div class="side-section">
+        <h3 class="side-title">Contact</h3>
+        <ul class="contact">
+          <li>Samara, Russia</li>
+          <li>Open to remote / relocation</li>
+          <li>cv.savkin.sp@gmail.com</li>
+          <li>+7 903 366 3005</li>
+          <li>Russian — Native</li>
+          <li>English — C1</li>
+        </ul>
       </div>
-      <div class="actions">
-        <a class="btn" href="#contact">Связаться</a>
-        <a class="btn secondary" href="CV.pdf" download>Скачать PDF</a>
-        <a class="btn secondary" href="#skills">Навыки</a>
+
+      <div class="side-section">
+        <h3 class="side-title">Core strengths</h3>
+        <ul class="skills-list">
+          <li>Requirements engineering</li>
+          <li>API design: REST, gRPC</li>
+          <li>System integrations</li>
+          <li>Microservice interactions</li>
+          <li>Event-driven flows with Kafka</li>
+          <li>BPMN, UML, C4, PlantUML</li>
+        </ul>
       </div>
-    </header>
 
-    <nav class="mono">
-      <a href="#summary">Обо мне</a>
-      <a href="#experience">Опыт</a>
-      <a href="#skills">Навыки</a>
-      <a href="#education">Образование</a>
-      <a href="#contact">Контакты</a>
-    </nav>
+      <div class="side-section">
+        <h3 class="side-title">Tools & data</h3>
+        <ul class="tools-list">
+          <li>Swagger, Postman</li>
+          <li>Jira, Confluence, Git</li>
+          <li>SQL, MySQL, Oracle, PostgreSQL</li>
+          <li>DBeaver, Figma</li>
+        </ul>
+      </div>
 
-    <main>
-      <section id="summary" class="card">
-        <h2>Цель</h2>
-        <p>
-          Опытный системный аналитик с техническим бэкграундом в веб‑разработке и проектировании интеграций.
-          Ищу позицию, где можно участвовать в создании и развитии сложных ИТ‑систем — от анализа бизнес‑требований до внедрения и сопровождения решений.
+      <div class="side-section">
+        <h3 class="side-title">Education</h3>
+        <p class="lead" style="margin:0;">
+          Samara State University<br>
+          Bachelor's Degree, Computer Security<br>
+          2021
+        </p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="hero">
+        <div>
+          <h1>System Analyst<br>for integration-heavy products</h1>
+          <p>
+            System Analyst with 3+ years of analytical experience and an earlier web development background. I work at the intersection of business needs and engineering delivery: structuring requirements, designing APIs and service interactions, describing business processes, and helping teams release features without ambiguity.
+          </p>
+          <div class="pill-row">
+            <span class="pill">API & Integration Design</span>
+            <span class="pill">Kafka</span>
+            <span class="pill">REST / gRPC</span>
+            <span class="pill">BPMN / UML / C4</span>
+            <span class="pill">SQL</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Key achievements</h2>
+        <div class="achievement-grid">
+          <div class="achievement">
+            <strong>15% → 45%</strong>
+            <span>Raised automation level of customer support processes by launching chatbot scenarios and service integrations.</span>
+          </div>
+          <div class="achievement">
+            <strong>New support channels</strong>
+            <span>Launched customer chat and Beauty support chat, expanding digital support coverage.</span>
+          </div>
+          <div class="achievement">
+            <strong>Proactive assistant</strong>
+            <span>Designed communication flows for reminders about appointments, lab results, and medical services.</span>
+          </div>
+          <div class="achievement">
+            <strong>Technical bridge</strong>
+            <span>Improved collaboration between analysts and developers by clarifying requirements, contracts, and implementation details.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Professional summary</h2>
+        <p class="summary">
+          I specialize in integration-heavy products where requirements need to be translated into clear technical decisions. My background in development helps me speak the language of engineers, understand implementation constraints, and write documentation that is actually useful for delivery. I am strongest in system analysis, API and contract design, business process modeling, and cross-team communication.
         </p>
       </section>
 
-      <section id="skills" class="card">
-        <h2>Ключевые компетенции</h2>
-        <div class="grid two">
-          <ul>
-            <li>Системный и бизнес‑анализ полного цикла (AS‑IS / TO‑BE)</li>
-            <li>Проектирование требований к backend и frontend</li>
-            <li>UML / BPMN (включая ER‑диаграммы)</li>
-            <li>Формализация и поддержка ТЗ, Use Case / User Story</li>
-            <li>Постановка задач разработчикам/тестировщикам, приёмка</li>
+      <section class="section">
+        <h2 class="section-title">Professional experience</h2>
+
+        <article class="exp-item">
+          <div class="exp-head">
+            <h3>System Analyst <span class="company">— MEDSI Group</span></h3>
+            <div class="date">Oct 2023 — Present</div>
+          </div>
+          <p class="exp-intro">Digital healthcare platform. Working on customer support automation, communication services, and integrations between internal systems and external channels.</p>
+          <ul class="bullets">
+            <li>Ran the full analysis cycle: from discovery sessions with stakeholders to technical documentation, acceptance criteria, and task decomposition.</li>
+            <li>Designed integration solutions, API contracts, data mappings, and interaction logic between services.</li>
+            <li>Prepared technical specifications, user stories, use cases, process diagrams, and product knowledge base materials.</li>
+            <li>Modeled business processes and architecture using BPMN, UML, C4, and PlantUML.</li>
+            <li>Worked with Swagger, Postman, Kafka, Git, SQL, MySQL, and Oracle as part of analysis and delivery support.</li>
+            <li>Supported QA with test cases and clarifications, took part in demos, backlog refinement, and cross-team coordination.</li>
+            <li>Participated in hiring and onboarding, and regularly aligned solutions with architects and development teams.</li>
           </ul>
-          <ul>
-            <li>Проектирование интеграций REST ↔ gRPC; базовые SOAP‑подходы</li>
-            <li>JSON • XML • YAML • Swagger</li>
-            <li>SQL / MySQL; анализ БД</li>
-            <li>Agile/Scrum, фасилитация (дейли, грумминги, демо, ретро)</li>
-            <li>Работа с инцидентами, сопровождение тестирования</li>
+        </article>
+
+        <article class="exp-item">
+          <div class="exp-head">
+            <h3>System Analyst <span class="company">— Farmperspektiva</span></h3>
+            <div class="date">Jun 2022 — Oct 2023</div>
+          </div>
+          <p class="exp-intro">Pharmaceutical retail and delivery platform. Worked on online ordering and delivery flows for OTC and prescription drugs.</p>
+          <ul class="bullets">
+            <li>Collected, analyzed, and formalized requirements from business stakeholders and internal заказчики.</li>
+            <li>Prepared functional requirements, user stories, business logic descriptions, and API documentation for development teams.</li>
+            <li>Designed interactions between ordering, delivery, and prescription-processing systems.</li>
+            <li>Built UI prototypes to validate user scenarios and clarify functional expectations before implementation.</li>
+            <li>Worked with MySQL, Oracle, and SQL queries for data analysis, validation, and release support.</li>
+            <li>Participated in testing integrations and mobile app features, presented solutions, and updated project documentation.</li>
+          </ul>
+        </article>
+
+        <article class="exp-item">
+          <div class="exp-head">
+            <h3>Frontend Developer <span class="company">— Web Studio “Tire”</span></h3>
+            <div class="date">Jul 2021 — Jun 2022</div>
+          </div>
+          <p class="exp-intro">Commercial web projects with focus on responsive interfaces and frontend integration.</p>
+          <ul class="bullets">
+            <li>Developed responsive interfaces using HTML, CSS, JavaScript, and SASS.</li>
+            <li>Integrated UI components with backend functionality and participated in implementation of interaction logic.</li>
+            <li>Optimized pages, fixed defects, and supported releases for production web projects.</li>
+          </ul>
+        </article>
+
+        <article class="exp-item">
+          <div class="exp-head">
+            <h3>Web Developer <span class="company">— VITA Pharmacy Network</span></h3>
+            <div class="date">Jan 2020 — May 2020</div>
+          </div>
+          <p class="exp-intro">Internal web services and admin tools for content and product management.</p>
+          <ul class="bullets">
+            <li>Developed an internal CMS for product catalog administration.</li>
+            <li>Implemented frontend and backend logic using Vue.js, PHP, Node.js, and database queries.</li>
+            <li>Maintained and improved internal systems used by the company.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section two-col">
+        <div class="mini-card">
+          <h4>Selected projects</h4>
+          <ul class="bullets">
+            <li>Customer support automation with chatbot integrations and proactive communication flows.</li>
+            <li>External messenger integration for digital communication platform.</li>
+            <li>Parcel locker delivery flow for OTC products.</li>
+            <li>Courier delivery process for prescription medicines.</li>
           </ul>
         </div>
-        <div class="tags">
-          <span class="tag">REST</span>
-          <span class="tag">gRPC</span>
-          <span class="tag">UML</span>
-          <span class="tag">BPMN 2.0</span>
-          <span class="tag">Swagger</span>
-          <span class="tag">JSON</span>
-          <span class="tag">XML</span>
-          <span class="tag">YAML</span>
-          <span class="tag">SQL</span>
-          <span class="tag">MySQL</span>
-          <span class="tag">Jira</span>
-          <span class="tag">Confluence</span>
-          <span class="tag">Git</span>
-          <span class="tag">Kafka (понимание)</span>
+        <div class="mini-card">
+          <h4>What makes this profile strong</h4>
+          <ul class="bullets">
+            <li>3+ years as a system analyst plus a prior development background.</li>
+            <li>Hands-on experience with both requirements and technical implementation context.</li>
+            <li>Strong fit for integration-heavy teams, product companies, and fintech-style environments.</li>
+            <li>Able to work comfortably between business, architecture, development, and QA.</li>
+          </ul>
         </div>
       </section>
 
-      <section id="experience" class="card">
-        <h2>Опыт работы</h2>
-
-        <h3>МЕДСИ, группа компаний — Системный аналитик / Тимлид / Техлид</h3>
-        <div class="row">
-          <div class="muted">Москва</div>
-          <div class="muted">09.2023 — наст. время</div>
-        </div>
-        <p class="muted">Проект: чат‑бот для автоматизации клиентского взаимодействия</p>
-        <ul>
-          <li>Проектирование системных требований для backend и frontend;</li>
-          <li>Анализ бизнес‑требований, описание Use Cases и пользовательских сценариев;</li>
-          <li>Проектирование интеграций REST → gRPC, участие в согласовании архитектуры;</li>
-          <li>Разработка UML и BPMN‑диаграмм, ER‑диаграмм;</li>
-          <li>Подготовка ТЗ и технической документации, сопровождение разработки и тестирования;</li>
-          <li>Обработка инцидентов, контроль корректности интеграций;</li>
-          <li>Тимлид продуктовой команды: планирование задач, фасилитация, взаимодействие с заказчиками и подрядчиками;</li>
-          <li>Презентации решений на демо, анализ UX‑откликов пользователей.</li>
-        </ul>
-        <p><b>Достижения:</b> автоматизация процессов: 15% → 45%; ускорение delivery‑цикла; внедрение документации REST/gRPC‑интерфейсов.</p>
-        <hr>
-
-        <h3>Фармперспектива — Аналитик</h3>
-        <div class="row">
-          <div class="muted">Самара</div>
-          <div class="muted">06.2022 — 08.2023</div>
-        </div>
-        <ul>
-          <li>Согласование ТЗ и системных требований между заказчиком и разработкой;</li>
-          <li>Подготовка SQL‑запросов, анализ БД (MySQL, Oracle);</li>
-          <li>Проектирование UI‑прототипов и ER‑диаграмм;</li>
-          <li>Сопровождение тестирования и внедрения решений.</li>
-        </ul>
-        <hr>
-
-        <h3>Студия web‑разработки «Тире» — Frontend‑разработчик</h3>
-        <div class="row">
-          <div class="muted">Самара</div>
-          <div class="muted">01.2021 — 06.2022</div>
-        </div>
-        <ul>
-          <li>Разработка адаптивных интерфейсов (HTML/CSS/JS);</li>
-          <li>Интеграция с backend и БД;</li>
-          <li>Постановка и приёмка задач в web‑проектах.</li>
-        </ul>
-      </section>
-
-      <section id="education" class="card">
-        <h2>Образование</h2>
-        <p>
-          Самарский государственный университет — Механико‑математический факультет,
-          направление «Компьютерная безопасность», специалитет (2021)
-        </p>
-      </section>
-
-      <section id="contact" class="card">
-        <h2>Контакты</h2>
-        <p class="grid">
-          <span>Тел.: <a href="tel:+79033663005" class="mono" itemprop="telephone">+7 903 366‑30‑05</a></span>
-          <span>E‑mail: <a id="email" class="mono" itemprop="email" href="#">показать</a></span>
-          <span>Telegram: <a href="https://t.me/Owl_Grey" rel="me" class="mono">@Owl_Grey</a></span>
-          <span>Локация: <span class="mono" itemprop="address">Самара, РФ</span></span>
-        </p>
-      </section>
+      <p class="footer-note">This CV version is optimized for product companies and international roles, with emphasis on impact, integrations, and technical depth.</p>
     </main>
-
-    <footer class="muted">
-      © <span id="y"></span> Савкин Сергей Петрович • 2025
-    </footer>
   </div>
-  <script>document.getElementById('y').textContent=(new Date()).getFullYear();</script>
 </body>
 </html>
